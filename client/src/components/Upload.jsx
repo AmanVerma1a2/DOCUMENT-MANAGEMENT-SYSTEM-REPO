@@ -71,8 +71,8 @@ export default function Upload({ setToast, user }) {
           flex: 1,
           minWidth: 340,
           minHeight: 340,
-          border: dragActive ? '2px dashed #764ba2' : '2px dashed #667eea',
-          background: dragActive ? '#f3e8ff' : '#f5f7fa',
+          border: dragActive ? '2px dashed #7c3aed' : '2px dashed #a78bfa',
+          background: dragActive ? '#ede9fe' : '#f5f7fa',
           borderRadius: 10,
           padding: 32,
           textAlign: 'center',
@@ -94,11 +94,11 @@ export default function Upload({ setToast, user }) {
         <div style={{ fontSize: 40, color: '#b4b8f0', marginBottom: 12 }}>
           <span role="img" aria-label="upload">☁️</span>
         </div>
-        <div style={{ fontWeight: 600, color: '#667eea', fontSize: 18, marginBottom: 4 }}>Drag & Drop Files Here</div>
+        <div style={{ fontWeight: 600, color: '#7c3aed', fontSize: 18, marginBottom: 4 }}>Drag & Drop Files Here</div>
         <div style={{ color: '#888', fontSize: 14, marginBottom: 16 }}>or click to browse files</div>
-        <button type="button" style={{ background: 'linear-gradient(90deg, #667eea, #764ba2)', color: '#fff', border: 'none', borderRadius: 8, padding: '0.5rem 1.2rem', fontWeight: 500 }}>Choose Files</button>
+        <button type="button" style={{ background: 'linear-gradient(90deg, #7c3aed, #a78bfa)', color: '#fff', border: 'none', borderRadius: 8, padding: '0.5rem 1.2rem', fontWeight: 500 }}>Choose Files</button>
         {file && (
-          <div style={{ marginTop: 16, color: '#764ba2', fontWeight: 500 }}>
+          <div style={{ marginTop: 16, color: '#7c3aed', fontWeight: 500 }}>
             {file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)
           </div>
         )}

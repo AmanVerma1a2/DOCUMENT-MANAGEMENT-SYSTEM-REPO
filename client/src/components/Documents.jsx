@@ -125,63 +125,80 @@ export default function Documents({ setToast }) {
           ))}
         </select>
       </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24 }}>
-        {filtered.map(doc => (
-          <div key={doc._id} style={{ background: '#fff', borderRadius: 12, padding: 20, minWidth: 260, boxShadow: '0 2px 8px #0001', position: 'relative' }}>
-            <div style={{ fontSize: 40, marginBottom: 8 }}>{getTypeIcon(doc.name)}</div>
-            <h3 style={{ fontWeight: 600 }}>{doc.name}</h3>
-            <div style={{ fontSize: 12, color: '#888', margin: '8px 0' }}>
-              Uploaded: {doc.uploadedAt ? new Date(doc.uploadedAt).toLocaleDateString() : '--'}
-            </div>
-            <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-              {(() => {
-                const ext = doc.name.split('.').pop().toLowerCase();
-                if (["jpg","jpeg","png","gif","bmp","svg","webp"].includes(ext)) {
-                  // Images: open directly
-                  return (
-                    <a href={doc.url.replace('/raw/upload/', '/image/upload/')}
-                      target="_blank" rel="noopener noreferrer">
-                      <button>View</button>
-                    </a>
-                  );
-                } else if (ext === "pdf") {
-                  // PDFs: use Google Docs Viewer
-                  const gview = `https://docs.google.com/gview?url=${encodeURIComponent(doc.url)}&embedded=true`;
-                  return (
-                    <a href={gview} target="_blank" rel="noopener noreferrer">
-                      <button>View</button>
-                    </a>
-                  );
-                } else if (["txt","md"].includes(ext)) {
-                  // Text files: open in a new tab (raw)
-                  return (
-                    <a href={doc.url} target="_blank" rel="noopener noreferrer">
-                      <button>View</button>
-                    </a>
-                  );
-                } else {
-                  // Other files: open/download
-                  return (
-                    <a href={doc.url} target="_blank" rel="noopener noreferrer">
-                      <button>View</button>
-                    </a>
-                  );
-                }
-              })()}
-              <button
-                onClick={e => {
-                  e.preventDefault();
-                  handleDownload(doc);
-                }}
-              >Download</button>
-              <button onClick={() => handleDelete(doc._id)}>Delete</button>
-            </div>
-          </div>
-        ))}
-        {filtered.length === 0 && !error && (
-          <div style={{ color: '#888', fontSize: 18, marginTop: 32 }}>No documents found.</div>
-        )}
-      </div>
+      {docs.length > 0 && (
+        <div className="table-responsive" style={{ overflowX: 'auto', background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #0001', padding: 16 }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr style={{ background: '#f9f9f9', borderBottom: '2px solid #e1e1e1' }}>
+                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600 }}>Document</th>
+                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600 }}>Uploaded At</th>
+                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600 }}>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map(doc => (
+                <tr key={doc._id} style={{ borderBottom: '1px solid #e1e1e1' }}>
+                  <td style={{ padding: 12, display: 'flex', alignItems: 'center' }}>
+                    <div style={{ fontSize: 24, marginRight: 8 }}>{getTypeIcon(doc.name)}</div>
+                    <div style={{ fontWeight: 500 }}>{doc.name}</div>
+                  </td>
+                  <td style={{ padding: 12 }}>
+                    {doc.uploadedAt ? new Date(doc.uploadedAt).toLocaleDateString() : '--'}
+                  </td>
+                  <td style={{ padding: 12 }}>
+                    <div style={{ display: 'flex', gap: 8 }}>
+                      {(() => {
+                        const ext = doc.name.split('.').pop().toLowerCase();
+                        if (["jpg","jpeg","png","gif","bmp","svg","webp"].includes(ext)) {
+                          // Images: open directly
+                          return (
+                            <a href={doc.url.replace('/raw/upload/', '/image/upload/')}
+                              target="_blank" rel="noopener noreferrer">
+                              <button>View</button>
+                            </a>
+                          );
+                        } else if (ext === "pdf") {
+                          // PDFs: use Google Docs Viewer
+                          const gview = `https://docs.google.com/gview?url=${encodeURIComponent(doc.url)}&embedded=true`;
+                          return (
+                            <a href={gview} target="_blank" rel="noopener noreferrer">
+                              <button>View</button>
+                            </a>
+                          );
+                        } else if (["txt","md"].includes(ext)) {
+                          // Text files: open in a new tab (raw)
+                          return (
+                            <a href={doc.url} target="_blank" rel="noopener noreferrer">
+                              <button>View</button>
+                            </a>
+                          );
+                        } else {
+                          // Other files: open/download
+                          return (
+                            <a href={doc.url} target="_blank" rel="noopener noreferrer">
+                              <button>View</button>
+                            </a>
+                          );
+                        }
+                      })()}
+                      <button
+                        onClick={e => {
+                          e.preventDefault();
+                          handleDownload(doc);
+                        }}
+                      >Download</button>
+                      <button onClick={() => handleDelete(doc._id)}>Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      {filtered.length === 0 && !error && (
+        <div style={{ color: '#888', fontSize: 18, marginTop: 32 }}>No documents found.</div>
+      )}
     </section>
   );
 }

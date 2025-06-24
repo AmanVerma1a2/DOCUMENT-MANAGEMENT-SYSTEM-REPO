@@ -33,19 +33,44 @@ export default function History() {
       <div style={{ color: '#888', marginBottom: 24 }}>All uploaded documents with their upload dates</div>
       {loading && <div>Loading...</div>}
       {error && <div style={{ color: '#e53e3e', marginBottom: 16 }}>{error}</div>}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24 }}>
-        {docs.map(doc => (
-          <div key={doc._id} style={{ background: '#fff', borderRadius: 12, padding: 20, minWidth: 260, boxShadow: '0 2px 8px #0001', position: 'relative' }}>
-            <h3 style={{ fontWeight: 600 }}>{doc.name}</h3>
-            <div style={{ fontSize: 12, color: '#888', margin: '8px 0' }}>
-              Uploaded: {doc.uploadedAt ? new Date(doc.uploadedAt).toLocaleString() : '--'}
-            </div>
-          </div>
-        ))}
-        {docs.length === 0 && !loading && !error && (
-          <div style={{ color: '#888', fontSize: 18, marginTop: 32 }}>No upload history found.</div>
-        )}
-      </div>
+      {docs.length === 0 && !loading && !error && (
+        <div style={{ color: '#888', fontSize: 18, marginTop: 32 }}>No upload history found.</div>
+      )}
+      {docs.length > 0 && (
+        <div className="table-responsive" style={{ overflowX: 'auto', background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #0001', padding: 16 }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr style={{ background: '#ede9fe' }}>
+                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600, color: '#7c3aed' }}>#</th>
+                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600, color: '#7c3aed' }}>Document Name</th>
+                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600, color: '#7c3aed' }}>Size</th>
+                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600, color: '#7c3aed' }}>Upload Date</th>
+                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600, color: '#7c3aed' }}>Upload Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {docs.map((doc, idx) => {
+                let uploadDate = '--';
+                let uploadTime = '--';
+                if (doc.uploadedAt) {
+                  const dateObj = new Date(doc.uploadedAt);
+                  uploadDate = dateObj.toLocaleDateString();
+                  uploadTime = dateObj.toLocaleTimeString();
+                }
+                return (
+                  <tr key={doc._id} style={{ borderBottom: '1px solid #a78bfa', background: idx % 2 === 0 ? '#f5f3ff' : '#fff' }}>
+                    <td style={{ padding: 10, color: '#7c3aed' }}>{idx + 1}</td>
+                    <td style={{ padding: 10 }}>{doc.name}</td>
+                    <td style={{ padding: 10 }}>{doc.size ? (doc.size / 1024).toFixed(2) + ' KB' : '--'}</td>
+                    <td style={{ padding: 10 }}>{uploadDate}</td>
+                    <td style={{ padding: 10 }}>{uploadTime}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
     </section>
   );
 }
