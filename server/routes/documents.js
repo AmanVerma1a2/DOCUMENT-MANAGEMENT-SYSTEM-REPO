@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Document = require('../models/Document');
+const UploadHistory = require('../models/UploadHistory');
 const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
@@ -62,6 +63,13 @@ router.post('/upload', authenticateToken, (req, res, next) => {
         uploadedBy: req.user.id,
       });
       await doc.save();
+      // Save upload history
+      await UploadHistory.create({
+        user: req.user.id,
+        documentName: req.file.originalname,
+        size: req.file.size,
+        uploadedAt: new Date(),
+      });
       res.json(doc);
     } catch (e) {
       console.error('DB save error:', e);
@@ -88,6 +96,36 @@ router.delete('/:id', authenticateToken, async (req, res) => {
     res.json({ message: 'Document deleted', id: req.params.id });
   } catch (err) {
     res.status(500).json({ message: 'Error deleting document' });
+  }
+});
+
+// Get upload history (protected)
+router.get('/history', authenticateToken, async (req, res) => {
+  try {
+    const history = await UploadHistory.find({ user: req.user.id }).sort({ uploadedAt: -1 });
+    res.json(history);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to fetch upload history' });
+  }
+});
+
+// Clear upload history for user
+router.delete('/history', authenticateToken, async (req, res) => {
+  try {
+    await UploadHistory.deleteMany({ user: req.user.id });
+    res.json({ message: 'Upload history cleared' });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to clear upload history' });
+  }
+});
+
+// Delete a single upload history entry for user
+router.delete('/history/:id', authenticateToken, async (req, res) => {
+  try {
+    await UploadHistory.deleteOne({ _id: req.params.id, user: req.user.id });
+    res.json({ message: 'History entry deleted' });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to delete history entry' });
   }
 });
 
