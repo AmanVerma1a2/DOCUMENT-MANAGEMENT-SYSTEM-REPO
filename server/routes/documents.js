@@ -33,8 +33,12 @@ const upload = multer({ storage: storage });
 
 // Get all documents (protected)
 router.get('/', authenticateToken, async (req, res) => {
-  const docs = await Document.find();
-  res.json(docs);
+  try {
+    const docs = await Document.find({ uploadedBy: req.user.id });
+    res.json(docs);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to fetch documents' });
+  }
 });
 
 // Upload a document (protected)
