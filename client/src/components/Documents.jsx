@@ -68,10 +68,11 @@ export default function Documents({ setToast }) {
     }
   };
 
-  // Helper to download files (especially images)
+  // Helper to download files (especially images and pdf)
   const handleDownload = async (doc) => {
     const ext = doc.name.split('.').pop().toLowerCase();
     if (["jpg","jpeg","png","gif","bmp","svg","webp"].includes(ext)) {
+      // Handle images
       try {
         const response = await fetch(doc.url, { mode: 'cors' });
         const blob = await response.blob();
@@ -86,8 +87,24 @@ export default function Documents({ setToast }) {
       } catch (err) {
         setToast && setToast({ message: 'Failed to download image', type: 'error' });
       }
+    } else if (ext === 'pdf') {
+      // Handle PDF files specifically
+      try {
+        const response = await fetch(doc.url, { mode: 'cors' });
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = doc.name; // This ensures the PDF extension is preserved
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+      } catch (err) {
+        setToast && setToast({ message: 'Failed to download PDF', type: 'error' });
+      }
     } else {
-      // For other files, fallback to default behavior
+      // For other files, use the original fallback method
       const a = document.createElement('a');
       a.href = doc.url;
       a.download = doc.name;
