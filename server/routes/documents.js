@@ -20,7 +20,7 @@ const storage = new CloudinaryStorage({
     // Only allow images and pdf
     return {
       folder: 'documents',
-      resource_type: imageExts.includes(ext) ? 'image' : 'raw',
+      resource_type: imageExts.includes(ext) ? 'image' : 'raw', // <--- this is correct
       allowed_formats: [
         'jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp', // images
         'pdf' // pdf only
