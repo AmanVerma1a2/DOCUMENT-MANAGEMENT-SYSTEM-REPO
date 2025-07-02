@@ -120,7 +120,8 @@ export default function Documents({ setToast }) {
       (type === 'image' && ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp'].includes(ext)) ||
       (type === 'pdf' && ext === 'pdf') ||
       type === '';
-    return matchesType;
+    const matchesSearch = !search || (doc.name && doc.name.toLowerCase().includes(search.toLowerCase()));
+    return matchesType && matchesSearch;
   });
 
   return (
