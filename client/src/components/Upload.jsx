@@ -1,8 +1,6 @@
 import React, { useState, useRef } from 'react';
 
 export default function Upload({ setToast, user }) {
-  const [title, setTitle] = useState('');
-  const [desc, setDesc] = useState('');
   const [file, setFile] = useState(null);
   const [dragActive, setDragActive] = useState(false);
   const inputRef = useRef();
@@ -14,8 +12,6 @@ export default function Upload({ setToast, user }) {
       return;
     }
     const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', desc);
     formData.append('file', file);
     const token = localStorage.getItem('token');
     try {
@@ -26,8 +22,6 @@ export default function Upload({ setToast, user }) {
       });
       if (res.ok) {
         setToast({ message: 'Document uploaded!', type: 'success' });
-        setTitle('');
-        setDesc('');
         setFile(null);
       } else {
         setToast({ message: 'Upload failed', type: 'error' });
@@ -103,17 +97,8 @@ export default function Upload({ setToast, user }) {
           </div>
         )}
       </div>
-      {/* Details Form */}
+      {/* Upload Form Only */}
       <form onSubmit={handleSubmit} style={{ background: '#fff', borderRadius: 12, padding: 24, minWidth: 320, boxShadow: '0 2px 8px #0001', flex: 1, maxWidth: 340 }}>
-        <h3 style={{ fontWeight: 600, marginBottom: 18 }}>Document Details</h3>
-        <div style={{ marginBottom: 16 }}>
-          <label>Document Title</label>
-          <input value={title} onChange={e => setTitle(e.target.value)} required style={{ width: '100%', marginTop: 4 }} />
-        </div>
-        <div style={{ marginBottom: 16 }}>
-          <label>Description</label>
-          <textarea value={desc} onChange={e => setDesc(e.target.value)} style={{ width: '100%', marginTop: 4 }} />
-        </div>
         <button type="submit" style={{ width: '100%', marginTop: 12 }}>Upload Document</button>
       </form>
     </section>
