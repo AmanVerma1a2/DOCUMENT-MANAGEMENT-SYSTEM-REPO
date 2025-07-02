@@ -65,8 +65,8 @@ export default function Upload({ setToast, user }) {
           flex: 1,
           minWidth: 340,
           minHeight: 340,
-          border: dragActive ? '2px dashed #7c3aed' : '2px dashed #a78bfa',
-          background: dragActive ? '#ede9fe' : '#f5f7fa',
+          border: `2px dashed ${dragActive ? '#e53935' : '#ccc'}`,
+          background: dragActive ? '#fbeaea' : '#f5f7fa',
           borderRadius: 10,
           padding: 32,
           textAlign: 'center',
@@ -85,21 +85,52 @@ export default function Upload({ setToast, user }) {
           style={{ display: 'none' }}
           onChange={handleFileChange}
         />
-        <div style={{ fontSize: 40, color: '#b4b8f0', marginBottom: 12 }}>
+        <div style={{ fontSize: 40, color: '#e53935', marginBottom: 12 }}>
           <span role="img" aria-label="upload">☁️</span>
         </div>
-        <div style={{ fontWeight: 600, color: '#7c3aed', fontSize: 18, marginBottom: 4 }}>Drag & Drop Files Here</div>
+        <div style={{ fontWeight: 600, color: '#e53935', fontSize: 18, marginBottom: 4 }}>Drag & Drop Files Here</div>
         <div style={{ color: '#888', fontSize: 14, marginBottom: 16 }}>or click to browse files</div>
-        <button type="button" style={{ background: 'linear-gradient(90deg, #7c3aed, #a78bfa)', color: '#fff', border: 'none', borderRadius: 8, padding: '0.5rem 1.2rem', fontWeight: 500 }}>Choose Files</button>
+        <button type="button" style={{
+          background: '#e53935',
+          color: '#fff',
+          border: 'none',
+          borderRadius: 8,
+          padding: '0.5rem 1.2rem',
+          fontWeight: 500,
+          cursor: 'pointer'
+        }}>
+          Choose Files
+        </button>
         {file && (
-          <div style={{ marginTop: 16, color: '#7c3aed', fontWeight: 500 }}>
+          <div style={{ marginTop: 16, color: '#e53935', fontWeight: 500 }}>
             {file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)
           </div>
         )}
       </div>
-      {/* Upload Form Only */}
-      <form onSubmit={handleSubmit} style={{ background: '#fff', borderRadius: 12, padding: 24, minWidth: 320, boxShadow: '0 2px 8px #0001', flex: 1, maxWidth: 340 }}>
-        <button type="submit" style={{ width: '100%', marginTop: 12 }}>Upload Document</button>
+
+      {/* Upload Form with black submit button */}
+      <form onSubmit={handleSubmit} style={{
+        background: '#fff',
+        borderRadius: 12,
+        padding: 24,
+        minWidth: 320,
+        boxShadow: '0 2px 8px #0001',
+        flex: 1,
+        maxWidth: 340
+      }}>
+        <button type="submit" style={{
+          width: '100%',
+          marginTop: 12,
+          background: '#000',     // Black background
+          color: '#fff',          // White text
+          border: 'none',
+          borderRadius: 8,
+          padding: '0.5rem 1rem',
+          fontWeight: 600,
+          cursor: 'pointer'
+        }}>
+          Upload Document
+        </button>
       </form>
     </section>
   );

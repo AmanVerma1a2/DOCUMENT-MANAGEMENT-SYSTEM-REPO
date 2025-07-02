@@ -38,7 +38,7 @@ export default function Dashboard() {
           <div style={{ fontSize: 32, fontWeight: 700 }}>{totalDocs}</div>
         </div>
         <div style={{ background: '#fff', borderRadius: 12, padding: 24, minWidth: 220, boxShadow: '0 2px 8px #0001' }}>
-          <div style={{ fontSize: 18, color: '#764ba2' }}>Total Uploaded Size</div>
+          <div style={{ fontSize: 18, color: '#667eea' }}>Total Uploaded Size</div>
           <div style={{ fontSize: 32, fontWeight: 700 }}>{totalSize}</div>
         </div>
       </div>

@@ -13,8 +13,8 @@ a {
 
 button {
   cursor: pointer;
-  background: linear-gradient(90deg, #7c3aed, #a78bfa);
-  color: #fff;
+  background: #000; /* Black background */
+  color: #fff;       /* White text */
   border: none;
   border-radius: 8px;
   padding: 0.5rem 1.2rem;
@@ -23,8 +23,9 @@ button {
   transition: background 0.2s, box-shadow 0.2s;
   box-shadow: 0 2px 8px #0001;
 }
+
 button:hover {
-  background: linear-gradient(90deg, #a78bfa, #7c3aed);
+  background: #333; /* Dark gray on hover */
   box-shadow: 0 4px 16px #0002;
 }
 
@@ -37,14 +38,16 @@ input, textarea {
   outline: none;
   transition: border 0.2s;
 }
+
 input:focus, textarea:focus {
-  border: 1.5px solid #7c3aed;
+  border: 1.5px solid #000; /* Replaced #7c3aed with black */
 }
 
 ::-webkit-scrollbar {
   width: 8px;
   background: #ede9fe;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #a78bfa;
   border-radius: 8px;
@@ -54,55 +57,65 @@ input:focus, textarea:focus {
   body {
     padding: 0;
   }
+
   main, #root {
     padding: 0 !important;
     margin: 0 !important;
     max-width: 100vw !important;
   }
+
   section {
     padding: 0 4vw !important;
   }
+
   table {
     font-size: 14px;
   }
+
   th, td {
     padding: 8px !important;
   }
+
   form {
     min-width: 0 !important;
     width: 100% !important;
     padding: 12px !important;
   }
+
   .card, .read-the-docs {
     padding: 1em !important;
   }
+
   .logo {
     height: 3em !important;
     padding: 0.5em !important;
   }
+
   .navbar {
     flex-direction: column !important;
     gap: 8px !important;
   }
+
   .navbar ul {
     flex-direction: column !important;
     gap: 8px !important;
   }
+
   .navbar h1 {
     font-size: 18px !important;
   }
+
   .navbar div {
     flex-direction: column !important;
     gap: 4px !important;
   }
-  /* Make tables scrollable horizontally */
+
   .table-responsive {
     overflow-x: auto;
     width: 100%;
   }
 }
 
-/* Optional: Hide table columns on very small screens */
 @media (max-width: 400px) {
   th:nth-child(3), td:nth-child(3) { display: none; }
   th:nth-child(4), td:nth-child(4) { display: none; }

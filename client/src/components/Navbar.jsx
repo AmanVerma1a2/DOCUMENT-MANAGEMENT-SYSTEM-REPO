@@ -11,7 +11,6 @@ export default function Navbar({ section, setSection, user, onSignout }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  // Close dropdown if clicked outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -26,7 +25,7 @@ export default function Navbar({ section, setSection, user, onSignout }) {
   const displayInitial = displayName[0]?.toUpperCase() || 'U';
 
   return (
-    <header style={{ background: 'linear-gradient(90deg, #7c3aed, #a78bfa)', color: '#fff', padding: '1rem 0' }}>
+    <header style={{ background: '#fff', color: '#000', padding: '1rem 0' }}>
       <nav className="navbar" style={{
         maxWidth: 1200,
         margin: '0 auto',
@@ -34,15 +33,28 @@ export default function Navbar({ section, setSection, user, onSignout }) {
         alignItems: 'center',
         justifyContent: 'space-between'
       }}>
-        <h1 style={{ fontSize: 24, fontWeight: 'bold' }}>DocX</h1>
+   <h1
+  style={{
+    fontSize: 32,
+    fontWeight: '900',
+    color: '#4A90E2',
+    textShadow: '2px 2px 4px rgba(0,0,0,0.2)',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    letterSpacing: '2px',
+    marginBottom: '16px',
+  }}
+>
+  Doc Manager
+</h1>
+
         <ul style={{ display: 'flex', gap: 24, listStyle: 'none', margin: 0, padding: 0 }}>
           {navItems.map(item => (
             <li key={item.key}>
               <button
                 onClick={() => setSection(item.key)}
                 style={{
-                  background: section === item.key ? '#ffffff33' : 'transparent',
-                  color: '#fff',
+                  background: section === item.key ? '#f0f0f0' : 'transparent',
+                  color: '#000',
                   border: 'none',
                   borderRadius: 8,
                   padding: '0.5rem 1rem',
@@ -63,8 +75,8 @@ export default function Navbar({ section, setSection, user, onSignout }) {
                 width: 40,
                 height: 40,
                 borderRadius: '50%',
-                background: '#fff',
-                color: '#7c3aed',
+                background:  '#007bff',
+                color: '#fff',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -84,7 +96,7 @@ export default function Navbar({ section, setSection, user, onSignout }) {
                 right: 0,
                 top: 'calc(100% + 8px)',
                 background: '#fff',
-                color: '#7c3aed',
+                color: '#000',
                 borderRadius: 8,
                 boxShadow: '0 2px 8px #0002',
                 minWidth: 140,
@@ -94,7 +106,7 @@ export default function Navbar({ section, setSection, user, onSignout }) {
                 <div style={{
                   padding: '10px 16px',
                   fontWeight: 600,
-                  borderBottom: '1px solid #ede9fe'
+                  borderBottom: '1px solid #ccc'
                 }}>
                   {displayName}
                 </div>
@@ -104,7 +116,7 @@ export default function Navbar({ section, setSection, user, onSignout }) {
                     width: '100%',
                     background: 'none',
                     border: 'none',
-                    color: '#7c3aed',
+                    color: '#000',
                     padding: '10px 16px',
                     textAlign: 'left',
                     borderRadius: 8,

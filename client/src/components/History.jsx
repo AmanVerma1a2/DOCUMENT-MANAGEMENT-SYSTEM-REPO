@@ -57,12 +57,12 @@ export default function History() {
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ background: '#ede9fe' }}>
-                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600, color: '#7c3aed' }}>#</th>
-                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600, color: '#7c3aed' }}>Document Name</th>
-                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600, color: '#7c3aed' }}>Size</th>
-                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600, color: '#7c3aed' }}>Upload Date</th>
-                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600, color: '#7c3aed' }}>Upload Time</th>
-                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600, color: '#7c3aed' }}>Actions</th>
+                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600, color: '#000' }}>#</th>
+                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600, color: '#000' }}>Doc Name</th>
+                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600, color: '#000' }}>Size</th>
+                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600, color: '#000' }}>Upload Date</th>
+                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600, color: '#000' }}>Upload Time</th>
+                <th style={{ padding: 12, textAlign: 'left', fontWeight: 600, color: '#000' }}>Actions</th>
               </tr>
             </thead>
             <tbody>
