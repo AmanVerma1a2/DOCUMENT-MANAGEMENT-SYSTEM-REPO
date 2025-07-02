@@ -13,6 +13,11 @@ export default function Auth({ onAuth }) {
       setError('Please fill all fields');
       return;
     }
+    // Email validation for username
+    if (!/^\S+@\S+\.\S+$/.test(username)) {
+      setError('Username must be a valid email address');
+      return;
+    }
     if (mode === 'signup' && password !== confirm) {
       setError('Passwords do not match');
       return;

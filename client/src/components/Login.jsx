@@ -7,12 +7,16 @@ export default function Login({ onLogin, switchToSignup }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // Replace with real API call
-    if (email && password) {
-      onLogin({ email });
-    } else {
+    // Email validation: must include '@' and at least one character before and after
+    if (!email || !password) {
       setError('Please enter email and password');
+      return;
     }
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      setError('Please enter a valid email address');
+      return;
+    }
+    onLogin({ email });
   };
 
   return (

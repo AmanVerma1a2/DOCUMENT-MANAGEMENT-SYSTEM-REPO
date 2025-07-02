@@ -20,6 +20,10 @@ router.post('/', async (req, res) => {
 // Signup
 router.post('/signup', async (req, res) => {
   const { username, password } = req.body;
+  // Email validation for username
+  if (!/^\S+@\S+\.\S+$/.test(username)) {
+    return res.status(400).json({ message: 'Username must be a valid email address' });
+  }
   const existingUser = await User.findOne({ username });
   if (existingUser) return res.status(400).json({ message: 'User already exists' });
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -31,6 +35,10 @@ router.post('/signup', async (req, res) => {
 // Login
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
+  // Email validation for username
+  if (!/^\S+@\S+\.\S+$/.test(username)) {
+    return res.status(400).json({ message: 'Username must be a valid email address' });
+  }
   const user = await User.findOne({ username });
   if (!user) return res.status(400).json({ message: 'User not found' });
   const isMatch = await bcrypt.compare(password, user.password);

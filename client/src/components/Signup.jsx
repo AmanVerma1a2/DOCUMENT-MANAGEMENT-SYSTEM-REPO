@@ -12,6 +12,10 @@ export default function Signup({ onSignup, switchToLogin }) {
       setError('Please fill all fields');
       return;
     }
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      setError('Please enter a valid email address');
+      return;
+    }
     if (password !== confirm) {
       setError('Passwords do not match');
       return;
