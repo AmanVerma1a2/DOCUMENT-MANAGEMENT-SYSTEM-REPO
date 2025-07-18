@@ -26,8 +26,8 @@ export default function Signup({ onSignup, switchToLogin }) {
 
   return (
     <section style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
-      <form onSubmit={handleSubmit} style={{ background: '#fff', borderRadius: 12, padding: 32, minWidth: 320, boxShadow: '0 2px 16px #0002' }}>
-        <h2 style={{ marginBottom: 24, color: '#667eea' }}>Sign Up</h2>
+      <form onSubmit={handleSubmit} style={{ background: '#fff', borderRadius: 0, padding: 48, minWidth: 450, boxShadow: '0 2px 16px #0002' }}>
+        <h2 style={{ marginBottom: 24, color: '#28a745' }}>Sign Up</h2>
         {error && <div style={{ color: '#e53e3e', marginBottom: 12 }}>{error}</div>}
         <div style={{ marginBottom: 16 }}>
           <label>Email</label>
@@ -44,7 +44,7 @@ export default function Signup({ onSignup, switchToLogin }) {
         <button type="submit" style={{ width: '100%' }}>Sign Up</button>
         <div style={{ marginTop: 16, fontSize: 14 }}>
           Already have an account?{' '}
-          <span style={{ color: '#667eea', cursor: 'pointer' }} onClick={switchToLogin}>Login</span>
+          <span style={{ color: '#28a745', cursor: 'pointer' }} onClick={switchToLogin}>Login</span>
         </div>
       </form>
     </section>

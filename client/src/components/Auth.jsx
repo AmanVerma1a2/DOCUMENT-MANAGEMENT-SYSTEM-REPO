@@ -57,8 +57,8 @@ export default function Auth({ onAuth }) {
 
   return (
     <section style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
-      <form onSubmit={handleSubmit} style={{ background: '#fff', borderRadius: 12, padding: 32, minWidth: 320, boxShadow: '0 2px 16px #0002' }}>
-        <h2 style={{ marginBottom: 24, color: '#667eea' }}>{mode === 'login' ? 'Login' : 'Sign Up'}</h2>
+      <form onSubmit={handleSubmit} style={{ background: '#fff', borderRadius: 0, padding: 48, minWidth: 450, boxShadow: '0 2px 16px #0002' }}>
+        <h2 style={{ marginBottom: 24, color: '#28a745' }}>{mode === 'login' ? 'Login' : 'Sign Up'}</h2>
         {error && <div style={{ color: error.includes('success') ? '#38a169' : '#e53e3e', marginBottom: 12 }}>{error}</div>}
         <div style={{ marginBottom: 16 }}>
           <label>Username</label>
@@ -77,9 +77,9 @@ export default function Auth({ onAuth }) {
         <button type="submit" style={{ width: '100%' }}>{mode === 'login' ? 'Login' : 'Sign Up'}</button>
         <div style={{ marginTop: 16, fontSize: 14 }}>
           {mode === 'login' ? (
-            <>Don't have an account?{' '}<span style={{ color: '#667eea', cursor: 'pointer' }} onClick={() => { setMode('signup'); setError(''); }}>Sign up</span></>
+            <>Don't have an account?{' '}<span style={{ color: '#28a745', cursor: 'pointer' }} onClick={() => { setMode('signup'); setError(''); }}>Sign up</span></>
           ) : (
-            <>Already have an account?{' '}<span style={{ color: '#667eea', cursor: 'pointer' }} onClick={() => { setMode('login'); setError(''); }}>Login</span></>
+            <>Already have an account?{' '}<span style={{ color: '#28a745', cursor: 'pointer' }} onClick={() => { setMode('login'); setError(''); }}>Login</span></>
           )}
         </div>
       </form>
